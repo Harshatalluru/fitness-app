@@ -26,7 +26,13 @@ describe('CreateUser', () => {
       fitnessGoal: 'strength'
     };
 
-    const expectedUser = { ...userData, id: '1', createdAt: new Date(), updatedAt: new Date() };
+    const expectedUser = { 
+      ...userData, 
+      id: '1', 
+      createdAt: new Date(), 
+      updatedAt: new Date(),
+      dateOfBirth: new Date('1990-01-01')
+    };
 
     mockUserRepository.findByEmail.mockResolvedValue(null);
     mockUserRepository.create.mockResolvedValue(expectedUser);
@@ -46,7 +52,13 @@ describe('CreateUser', () => {
       fitnessGoal: 'strength'
     };
 
-    const existingUser = { ...userData, id: '1', createdAt: new Date(), updatedAt: new Date() };
+    const existingUser = { 
+      ...userData, 
+      id: '1', 
+      createdAt: new Date(), 
+      updatedAt: new Date(),
+      dateOfBirth: new Date('1990-01-01')
+    };
     mockUserRepository.findByEmail.mockResolvedValue(existingUser);
 
     await expect(createUser.execute(userData)).rejects.toThrow('User with this email already exists');

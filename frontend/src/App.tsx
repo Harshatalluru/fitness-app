@@ -13,7 +13,6 @@ function App() {
   const { toasts, removeToast } = useToast();
 
   const renderContent = () => {
-    const props = { toast: { success: (msg: string) => {}, error: (msg: string) => {}, info: (msg: string) => {} } };
     switch (activeTab) {
       case 'dashboard':
         return <Dashboard />;
