@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { userApi, gymApi, membershipApi } from '../api';
-import { User, Gym } from '../types';
+import { User, Gym, MembershipWithGym, MembershipWithUser } from '../types';
 
 export const MembershipManagement: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);
@@ -62,7 +62,7 @@ export const MembershipManagement: React.FC = () => {
     try {
       const response = await membershipApi.getUserGyms(userId);
       // Extract gym data from membership objects
-      const gyms = response.data.map((membership) => ({
+      const gyms = response.data.map((membership: MembershipWithGym) => ({
         ...membership.gym,
         location: membership.gym.location || 'N/A'
       }));
@@ -77,7 +77,7 @@ export const MembershipManagement: React.FC = () => {
     try {
       const response = await membershipApi.getGymMembers(gymId);
       // Extract user data from membership objects
-      const users = response.data.map((membership) => ({
+      const users = response.data.map((membership: MembershipWithUser) => ({
         ...membership.user,
         fitnessGoal: membership.user.fitnessGoal || 'N/A',
         dateOfBirth: membership.user.dateOfBirth || '',

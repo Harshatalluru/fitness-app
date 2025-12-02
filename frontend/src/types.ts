@@ -22,3 +22,11 @@ export interface Membership {
   gymId: string;
   joinedAt: string;
 }
+
+export interface MembershipWithGym extends Membership {
+  gym: Gym;
+}
+
+export interface MembershipWithUser extends Membership {
+  user: User;
+}
